@@ -60,12 +60,13 @@ def get_predicted_dfs():
 
 
 def adjust_precision(predicted_df):
-    return sum(config['iou_threshold'] < predicted_df.iou) / len(predicted_df)
+    return sum(config['scoring']['detection_threshold'] < predicted_df.iou) / len(predicted_df)
 
 
 def adjust_recall(predicted_df, n_true):
-    return sum(config['iou_threshold'] < predicted_df.iou) / n_true
+    return sum(config['scoring']['detection_threshold'] < predicted_df.iou) / n_true
 
 
 def get_truthcat():
-    return pd.read_csv(config['truth_catalogue'], sep=' ', index_col='id')
+    return pd.read_csv("/home/DATA/PROJECTS/FCC_CHALMERS/ska-sdc-2/biggerData40/data/sky_full_truthcat_v2.txt", sep=' ', index_col='id')
+    #return pd.read_csv(config['truth_catalogue'], sep=' ', index_col='id')

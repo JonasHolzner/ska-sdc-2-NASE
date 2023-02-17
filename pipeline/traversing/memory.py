@@ -14,8 +14,12 @@ def max_batch_size(model, dim, gpu_memory_mib):
     except:
         raise ValueError('Too little memory for batch size = 1')
     gpus = nvsmi.get_gpu_processes()
-    pids = [int(str(gpu).split(' ')[1]) for gpu in gpus]
-    index = np.argwhere(np.array(pids) == pid)[0][0]
+    # pids = [int(str(gpu).split(' ')[1]) for gpu in gpus]
+    # print(pids)
+    # print(pid)
+    # print(gpus)
+    # index = np.argwhere(np.array(pids) == pid)[0]
+    index = 0
     mem_one = float(str(gpus[index]).split(' ')[-1].split('MB')[0])
     del input_one
     torch.cuda.empty_cache()

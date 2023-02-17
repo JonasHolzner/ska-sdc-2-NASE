@@ -1,11 +1,10 @@
-##
 import numpy as np
 import matplotlib.pyplot as plt
 
 from definitions import config
 from visualization.utils import get_pareto, get_params_df, get_predicted_dfs, get_truthcat
 
-plt.rcParams['text.usetex'] = True
+#plt.rcParams['text.usetex'] = True
 
 ALPHA = .5
 MAX_RANK = np.inf
@@ -41,7 +40,7 @@ axes[0].scatter(params_df.precision, params_df.recall, c=params_df.best_rank + 1
 axes[0].set_ylabel(r'Completeness')
 axes[0].set_xlabel(r'Reliability')
 
-iou = config['iou_threshold']
+iou = config['scoring']['detection_threshold']
 for l, ax in zip(linear_attrs.keys(), axes[1:]):
     maes = []
     ious = []

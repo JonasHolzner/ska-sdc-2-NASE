@@ -42,7 +42,7 @@ class BaseConverter(object):
         """
         for child_name, child in module.named_children():
             if isinstance(child, nn.Conv2d):
-                arguments = nn.Conv2d.__init__.__code__.co_varnames[1:]
+                arguments = nn.Conv2d.__init__.__code__.co_varnames[1:10] #Had to be changed since newer pytorch adds unfitting varnames
                 kwargs = {k: getattr(child, k) for k in arguments}
                 kwargs = self.convert_conv_kwargs(kwargs)
                 setattr(module, child_name, self.__class__.target_conv(**kwargs))
@@ -51,7 +51,7 @@ class BaseConverter(object):
                      'norm' in child.__class__.__name__.lower()):
                 if hasattr(nn, child.__class__.__name__.replace('2d', '3d')):
                     TargetClass = getattr(nn, child.__class__.__name__.replace('2d', '3d'))
-                    arguments = TargetClass.__init__.__code__.co_varnames[1:]
+                    arguments = TargetClass.__init__.__code__.co_varnames[1:6] #Had to be changed since newer pytorch adds unfitting varnames
                     kwargs = {k: getattr(child, k) for k in arguments}
                     if 'adaptive' in child.__class__.__name__.lower():
                         for k in kwargs.keys():
@@ -60,7 +60,7 @@ class BaseConverter(object):
                 else:
                     raise Exception('No corresponding module in 3D for 2d module {}'.format(child.__class__.__name__))
             elif isinstance(child, nn.Upsample):
-                arguments = nn.Upsample.__init__.__code__.co_varnames[1:]
+                arguments = nn.Upsample.__init__.__code__.co_varnames[1:10] #Had to be changed since newer pytorch adds unfitting varnames
                 kwargs = {k: getattr(child, k) for k in arguments}
                 kwargs['mode'] = 'trilinear' if kwargs['mode'] == 'bilinear' else kwargs['mode']
                 setattr(module, child_name, nn.Upsample(**kwargs))

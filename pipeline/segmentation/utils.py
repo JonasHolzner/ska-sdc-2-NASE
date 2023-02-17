@@ -150,7 +150,7 @@ def get_checkpoint_callback(use_sdc2_score=False, period=1):
                                               filename=config['segmentation']['model_name'] + '-' + str(
                                                   model_id) + '-{epoch:02d}-{score:.2f}',
                                               mode='max',
-                                              period=period)
+                                              every_n_epochs=period) #changed in newer tf version
     else:
         checkpoint_callback = ModelCheckpoint(monitor='val_loss',
                                               save_top_k=3,
@@ -158,7 +158,7 @@ def get_checkpoint_callback(use_sdc2_score=False, period=1):
                                               filename=config['segmentation']['model_name'] + '-' + str(
                                                   model_id) + '-{epoch:02d}-{val_loss:.2f}',
                                               mode='min',
-                                              period=period)
+                                              every_n_epochs=period) #changed in newer tf version
     return checkpoint_callback
 
 

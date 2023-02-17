@@ -17,7 +17,7 @@ fits_file = filename.data.test_sky()
 
 df = pd.read_csv(filename.data.test_true(), sep=' ', index_col='id')
 
-header = getheader(fits_file)
+header = getheader(fits_file,ignore_blank=True)
 
 segmentmap, allocation_dict = generate_validation_segmentmap(test_dataset_path, header, df.copy(), regenerate=True)
 

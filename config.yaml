@@ -1,16 +1,16 @@
 # Ensure very large files can be stored in these paths
 # dot (.) means project directory
 path:
-  data: ./data/
-  processed: ./processed/
-  models: ./saved_models/
+  data: /home/DATA/PROJECTS/FCC_CHALMERS/ska-sdc-2/data/
+  processed: /home/DATA/PROJECTS/FCC_CHALMERS/ska-sdc-2/processed/
+  models: /home/DATA/PROJECTS/FCC_CHALMERS/ska-sdc-2/data/
 
 data:
   splitsize: 1000 # Cubes to include in a single data set file (.pt)
   memory_batches: 20 # Number of splits read into memory when creating data set, smaller number takes more memory
 
 segmentation:
-  size: dev_l # dev_s or dev_l
+  size: dev_s # dev_s or dev_l
   limit_files: null # Specify to use a subset of data set, e.g., use only limit_files *.pt files
   model_name: resnet34 # Models verified compatible are resnet18, resnet34, resnet50, resnet101 & resnet152
   filtering:
